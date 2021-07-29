@@ -1,6 +1,6 @@
 ## ODD MSSQL adapter
 
-ODD MSSQL adapter is used for extracting datasets and and data transformers info and metadata from Microsoft SQL Server. This adapter is implemetation of pull model (see more https://github.com/opendatadiscovery/opendatadiscovery-specification/blob/main/specification/specification.md#discovery-models). By default application gather data from MSSQL every minute, put it inside local cache and then ready to give it away by /entities API.
+ODD MSSQL adapter is used for extracting datasets info and metadata from Microsoft SQL Server. This adapter is implemetation of pull model (see more https://github.com/opendatadiscovery/opendatadiscovery-specification/blob/main/specification/specification.md#discovery-models). By default application gather data from MSSQL every minute, put it inside local cache and then ready to give it away by /entities API.
 
 This service based on Python Flask and Connexion frameworks with APScheduler.
 
@@ -8,7 +8,7 @@ This service based on Python Flask and Connexion frameworks with APScheduler.
 | Entity type | Entity source |
 |:----------------:|:---------:|
 |Dataset|Tables, Columns|
-|Data Transformer|Views|
+|Data Transformer (coming soon)|Views|
 
 For more information about data entities see https://github.com/opendatadiscovery/opendatadiscovery-specification/blob/main/specification/specification.md#data-model-specification
 
