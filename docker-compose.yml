@@ -36,6 +36,7 @@ services:
       - MSSQLPASSWORD=odd-adapter-password-1
       # FLASK:
       - FLASK_ENVIRONMENT=development
+      - FLASK_APP=wsgi:application
     depends_on:
       - db-mssql
     ports:
