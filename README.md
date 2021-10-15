@@ -17,13 +17,9 @@ Application is ready to run out of the box by the docker-compose (see more https
 Strongly recommended to override next variables in docker-compose .env file:
 
 ```
-MSSQL_DATABASE=oddadapter
-MSSQL_USER=oddadapter
-MSSQL_PASSWORD=odd-adapter-password
-
-CLOUD_TYPE=aws
-CLOUD_REGION=region_1
-CLOUD_ACCOUNT=account_1
+ODBC_DATABASE=master
+ODBC_USER=sa
+ODBC_PASSWORD=odd-adapter-password-1
 ```
 
 After docker-compose run successful, application is ready to accept connection on port :8080. 
@@ -60,15 +56,14 @@ Adapter is ready to work out of box, but you probably will need to redefine some
 FLASK_ENVIRONMENT = development #For production case change this to "production"
 FLASK_APP = wsgi:application #Path to wsgi module of application (required by gunicorn)
 
-MSSQL_HOST = db #Host of your ClickHouse database.
-MSSQL_PORT = 9000 #Port of your ClickHouse database.
-MSSQL_DATABASE = oddadapter #Name of your ClickHouse database.
-MSSQL_USER = oddadapter #Username of your ClickHouse database.
-MSSQL_PASSWORD = odd-adapter-password #Password of your ClickHouse database.
+MSSQL_PID=Developer
 
-CLOUD_TYPE = aws #Name of your cloud service. Used to form ODDRN.
-CLOUD_REGION = region_1 #Region of your cloud service. Used to form ODDRN.
-CLOUD_ACCOUNT = account_1 #Account of your cloud service. Used to form ODDRN.
+ODBC_DRIVER="ODBC Driver 17 for SQL Server"
+ODBC_HOST=odd-mssql-db #Host of your ODBC.
+ODBC_PORT=1433 #Port of your ODBC.
+ODBC_DATABASE=master #Name of your ODBC.
+ODBC_USER=sa #Username of your ODBC.
+ODBC_PASSWORD=odd-adapter-password-1 #Password of your ODBC.
 ```
 
 ## Requirements

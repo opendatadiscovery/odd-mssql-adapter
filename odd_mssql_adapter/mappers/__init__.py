@@ -1,7 +1,5 @@
 from collections import namedtuple
 
-_adapter_prefix: str = "mssql/"
-
 _data_set_metadata_schema_url: str = \
     "https://raw.githubusercontent.com/opendatadiscovery/opendatadiscovery-specification/main/specification/" \
     "extensions/mssql.json#/definitions/MssqlDataSetExtension"

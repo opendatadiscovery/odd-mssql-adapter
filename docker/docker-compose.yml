@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+
+  db-mssql:
+    image: mcr.microsoft.com/mssql/server:latest
+    restart: always
+    container_name: odd-mssql-db
+    hostname: ${ODBC_HOST}
+    environment:
+      # https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-configure-environment-variables?view=sql-server-ver15
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=${ODBC_PASSWORD}
+      - MSSQL_PID=${MSSQL_PID}
+      - MSSQL_TCP_PORT=${ODBC_PORT}
+    ports:
+      - ${ODBC_PORT}:${ODBC_PORT}
+
+  odd-mssql-adapter:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: odd-mssql-adapter
+    restart: always
+    environment:
+      # Cache refreshing interval (minutes):
+      - SCHEDULER_INTERVAL_MINUTES=${SCHEDULER_INTERVAL_MINUTES}
+      # MS SQL Server:
+      # https://github.com/mkleehammer/pyodbc/wiki/Connecting-to-SQL-Server-from-Linux
+      # cat /etc/odbcinst.ini
+      - ODBC_DRIVER=${ODBC_DRIVER}
+      # ODBC_HOST=localhost
+      # ODBC_HOST='localhost\sqlexpress' # for a named instance
+      # ODBC_HOST='myserver,port' # to specify an alternate port
+      # ODBC_HOST='tcp:myserver\myinstance,port'
+      - ODBC_HOST=${ODBC_HOST}
+      - ODBC_DATABASE=${ODBC_DATABASE}
+      - ODBC_USER=${ODBC_USER}
+      - ODBC_PASSWORD=${ODBC_PASSWORD}
+      # FLASK:
+      - FLASK_ENVIRONMENT=${FLASK_ENVIRONMENT}
+      - FLASK_APP=${FLASK_APP}
+    depends_on:
+      - db-mssql
+    ports:
+      - 8080:8080
