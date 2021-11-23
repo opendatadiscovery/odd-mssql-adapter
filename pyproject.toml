@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "odd-mssql-adapter"
-version = "0.1.1"
+version = "0.1.2"
 description = ""
 authors = ["Ruslan Ibragimov <ribragimov@provectus.com>"]
 
@@ -11,8 +11,8 @@ gunicorn = "^20.1.0"
 flask = "^2.0.1"
 APScheduler = "^3.7.0"
 pyodbc = "^4.0.32"
-oddrn-generator = "^0.1.4"
-odd-models = "^1.0.4"
+odd-models = "^1.0.9"
+oddrn-generator = "^0.1.19"
 
 [tool.poetry.dev-dependencies]
 

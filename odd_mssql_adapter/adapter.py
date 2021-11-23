@@ -5,7 +5,7 @@ from odd_models.models import DataEntity
 from oddrn_generator import MssqlGenerator
 from pyodbc import Connection, Cursor
 
-from .mappers import _column_metadata, _column_table, _column_order_by, _table_metadata, _table_table, _table_order_by
+from .mappers import _table_query, _column_query
 from .mappers.tables import map_table
 
 
@@ -31,12 +31,12 @@ class MssqlAdapter:
     def get_data_source_oddrn(self) -> str:
         return self.__oddrn_generator.get_data_source_oddrn()
 
-    def get_datasets(self) -> list[DataEntity]:
+    def get_data_entities(self) -> list[DataEntity]:
         try:
             self.__connect()
 
-            tables = self.__query(_table_metadata, _table_table, _table_order_by)
-            columns = self.__query(_column_metadata, _column_table, _column_order_by)
+            tables = self.__execute(_table_query)
+            columns = self.__execute(_column_query)
 
             return map_table(self.__oddrn_generator, tables, columns)
         except Exception as e:
@@ -45,9 +45,6 @@ class MssqlAdapter:
         finally:
             self.__disconnect()
         return []
-
-    def __query(self, columns: str, table: str, order_by: str) -> list[tuple]:
-        return self.__execute(f"select {columns} from {table} order by {order_by}")
 
     def __execute(self, query: str) -> list[tuple]:
         self.__cursor.execute(query)
